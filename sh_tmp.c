@@ -1,12 +1,1 @@
-sslsls
-
-
-
-
-
-
-
-
-echo << kk
-exit
-
+gg'

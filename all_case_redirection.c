@@ -116,8 +116,8 @@ int		all_case_redirection(t_word *list)
 			res = redi_greatand(list);
 		else if (list->type == GREATANDMINUS)
 			res = redi_greatandminus(list);
-		else if (list->type == LESS)
-			res = redi_less(list);
+	//	else if (list->type == LESS)
+//			res = redi_less(list);
 		else if (list->type == LESSAND)
 			res = redi_lessand(list);
 		else if (list->type == LESSANDMINUS)

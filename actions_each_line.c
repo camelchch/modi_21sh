@@ -61,6 +61,6 @@ static void	actions_blocs(t_word *list, char ***env, t_sh *table)
 
 void		actions_each_line(char ***env, t_word *list, t_sh *table)
 {
-	if (!err_in_words(list))
+	if (!g_clc && !err_in_words(list))
 		actions_blocs(list, env, table);
 }

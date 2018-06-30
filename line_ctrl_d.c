@@ -32,7 +32,7 @@ int			ctrl_d(t_line *line)
 	{
 		if (g_inside_doc_quote)
 		{
-			g_end_line = 1;
+			g_dld = 1;
 			g_inside_doc_quote = 0;
 			return (0);
 		}
@@ -48,12 +48,20 @@ int			ctrl_d(t_line *line)
 
 int			ctrl_c(char *new_line, t_line *line)
 {
+	(void)new_line;
+	(void)line;
 	init_attr(SETOLD);
-	ft_printf("\n$> ");
+//	ft_printf("\n$> ");
 	ft_bzero(new_line, MAX_BUF);
-	init_line("$> ", line);
-	init_attr(SETNEW);
-	if (!g_inside_doc_quote)
+//	init_line("$> ", &g_line);
+//	init_attr(SETNEW);
 	g_clc = 1;
 	return (0);
+}
+
+int			ctrl_c_d(unsigned long key, char *new_line, t_line *line)
+{
+	if (key == CONTRL_C)
+		return (ctrl_c(new_line, line));
+	return (ctrl_d(line));
 }

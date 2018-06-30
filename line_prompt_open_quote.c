@@ -63,16 +63,16 @@ int				prompt_open_quote(char *line)
 			get_line("> ", new_line, &quote_line);
 			line[ft_strlen(line) - 1] = '\0';
 			ft_strcat(line, new_line);
-			(g_with_termcap && !g_clc) ? ft_printf("\n") : (void)g_with_termcap;
+			g_with_termcap ? ft_printf("\n") : (void)g_with_termcap;
 		}
 		else
 		{
 			for_open_quote(new_line, line, &quote_line);
 			if (ft_strlen(line) + ft_strlen(new_line) < MAX_BUF - 1)
 			ft_strcat(line, new_line);
-			(g_with_termcap && !g_clc) ? ft_printf("\n") : (void)g_with_termcap;
+			g_with_termcap ? ft_printf("\n") : (void)g_with_termcap;
 		}
-		if (g_clc)
+		if (g_clc || g_dld)
 			return (1);
 	}
 	return (0);

@@ -56,22 +56,21 @@ int			prompt(char **env, t_sh *table)
 
 	ft_bzero(g_temp_file, MAX_BUF);
 	ft_strcpy(g_temp_file, "./sh_tmp.c");
-	g_clc = 0;
-	g_inside_doc_quote = 0;
-	g_end_line = 0;
 	while (42)
 	{
 		get_line("$> ", g_new_line, &g_line);
-			(g_with_termcap && !g_clc) ? ft_printf("\n") : (void)g_clc;
+			g_with_termcap ? ft_printf("\n") : (void)g_clc;
 			if (not_empty(g_new_line))
 			{
 				add = malloc(sizeof(t_history));
 				init_add(add, g_new_line);
 				add_history(&g_history, add);
-				prompt_open_quote(g_new_line);
+				if (!prompt_open_quote(g_new_line))
+				{
 				list = command_to_words(g_new_line);
 				actions_each_line(&env, list, table);
 				free_word_list(list);
+				}
 			}
 	}
 	return (0);

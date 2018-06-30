@@ -36,6 +36,33 @@ void		do_all_pipe(int *pipe_fd, int nb_pipe)
 	}
 }
 
+static int	redirection_for_here(t_word *list)
+{
+	int		res;
+
+	res = 0;
+	while (list && !is_logic(list->type) && \
+			list->type != SEMI_DOT && list->type != PIPE)
+	{
+		if (list->type == GREAT)
+			res = redi_great(list);
+		else if (list->type == DGREAT)
+			res = redi_dgreat(list);
+		else if (list->type == GREATAND)
+			res = redi_greatand(list);
+		else if (list->type == GREATANDMINUS)
+			res = redi_greatandminus(list);
+		else if (list->type == LESSAND)
+			res = redi_lessand(list);
+		else if (list->type == LESSANDMINUS)
+			res = redi_lessandminus(list);
+		if (res < 0)
+			return (-1);
+		list = list->next;
+	}
+	return (0);
+}
+
 int			pro_is_buildin_no_pipe(t_word *list, char ***env, t_sh *table)
 {
 	char		**pro_args;
@@ -45,11 +72,13 @@ int			pro_is_buildin_no_pipe(t_word *list, char ***env, t_sh *table)
 	pro_args = NULL;
 	recover = fd_restorage(list, recover);
 	pro_args = my_here_doc_word_init_pro_args(list);
-	all_case_redirection(list);
-	do_build(pro_args, env, table);
-	recover_fd(recover);
-	free_saver_fd(recover);
 	if (pro_args)
+	{
+		redirection_for_here(list);
+		do_build(pro_args, env, table);
+		recover_fd(recover);
+		free_saver_fd(recover);
 		free(pro_args);
+	}
 	return (0);
 }

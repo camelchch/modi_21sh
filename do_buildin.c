@@ -27,14 +27,19 @@ static void	echo(char **paras)
 
 	ct = nb_str(paras);
 	paras++;
-	while (*paras)
+	if (ct > 1)
 	{
-		ft_printf("%s", *paras++);
-		if (ct-- > 2)
-			ft_printf(" ");
-		else
-			ft_printf("\n");
+		while (*paras)
+		{
+			ft_printf("%s", *paras++);
+			if (ct-- > 2)
+				ft_printf(" ");
+			else
+				ft_printf("\n");
+		}
 	}
+	else
+		ft_printf("\n");
 }
 
 void		ft_exit(char ***env, t_sh *table)

@@ -37,7 +37,7 @@ static int	write2_temp_file(char *word)
 		ft_bzero(doc.here, MAX_BUF);
 		i == 0 ? ft_printf("\n") : (i = 0);
 		get_line("heredoc> ", (char *)doc.here, &doc);
-		if (ft_strcmp(word, (char *)doc.here) && g_inside_doc_quote)
+		if (ft_strcmp(word, (char *)doc.here) && !g_clc && !g_dld)
 		{
 			if (write(temp_fd, doc.here, ft_strlen((char *)doc.here)) < 0)
 				ft_putendl_fd("write into temp file failed", 2);
@@ -46,7 +46,7 @@ static int	write2_temp_file(char *word)
 		else
 			g_inside_doc_quote = 0;
 	}
-	if (!g_clc && g_with_termcap)
+	if (g_with_termcap)
 		ft_printf("\n");
 	close(temp_fd);
 	return (0);

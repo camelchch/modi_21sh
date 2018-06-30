@@ -23,6 +23,7 @@ int		g_end_line;
 int		g_with_termcap;
 int		g_inside_doc_quote;
 int		g_clc;
+int		g_dld;
 
 # define MAX_BUF 10000
 # define SETNEW 1
@@ -193,6 +194,7 @@ int				delete_all(t_line *line);
 int				delete_at_position(t_line *line);
 int				ctrl_d(t_line *line);
 int				ctrl_c(char *new_line, t_line *line);
+int				ctrl_c_d(unsigned long key, char *new_line, t_line *line);
 int				printable(t_line *line, unsigned long key);
 void			put_a_key(t_line *line, unsigned long key);
 int				history_up(t_line *line);
@@ -261,6 +263,10 @@ void			my_here_doc(char *line);
 int				inclu_heredoc(char *new_line);
 char			**my_here_doc_word_init_pro_args(t_word *list);
 int				all_case_redirection(t_word *list);
+int				redi_great(t_word *list);
+int				redi_dgreat(t_word *list);
+int				redi_greatand(t_word *list);
+int				redi_greatandminus(t_word *list);
 int				redi_less(t_word *list);
 int				redi_lessand(t_word *list);
 int				redi_lessandminus(t_word *list);

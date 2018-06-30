@@ -66,9 +66,10 @@ static void				help_for_line(char **ligne, char *new_line, char *pt)
 	ft_bzero(new_line, MAX_BUF);
 	*ligne = NULL;
 	g_end_line = 0;
-	if (!g_clc)
+	init_attr(SETOLD);
 	ft_printf("%s", pt);
 	g_clc = 0;
+	g_dld = 0;
 }
 
 int						get_line(char *prompt, char *new_line, t_line *line)
@@ -80,7 +81,7 @@ int						get_line(char *prompt, char *new_line, t_line *line)
 	if (init_attr(SETNEW) == 0)
 	{
 		init_line(prompt, line);
-		while (((key = get_key()) && key != '\n') && !g_clc && !g_end_line)
+		while (((key = get_key()) && key != '\n') && !g_clc && !g_dld)
 		{
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));

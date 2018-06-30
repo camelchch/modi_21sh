@@ -19,11 +19,15 @@ void	signal_inh(int sign)
 	if (sign == SIGINT)
 	{
 		if (!g_with_termcap)
+		{
+		//	ft_printf("\n$> ");
+			g_clc = 1;
 			ft_printf("\n$> ");
+			}
 		else
 		{
 			init_attr(SETOLD);
-			ft_printf("\n$> ");
+			ft_printf("\n");
 			ft_bzero(g_new_line, MAX_BUF);
 			init_line("$> ", &g_line);
 			init_attr(SETNEW);

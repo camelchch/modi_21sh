@@ -38,6 +38,7 @@ int		redi_less(t_word *list)
 	else
 		fd = 0;
 	into_fd = open(list->next->word, O_RDONLY);
+	ft_printf("into_fd = %d   ", into_fd);
 	if (into_fd != -1)
 	{
 		if (into_fd != fd)
